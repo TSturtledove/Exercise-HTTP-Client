@@ -26,7 +26,18 @@ get('http://dev.markitondemand.com/MODApis/Api/v2/InteractiveChart/json?paramete
     try {
       let parsedData = JSON.parse(rawData);
       // console.log(parsedData);
-      console.log(parsedData.Elements[0].DataSeries.close.values);
+      // console.log(parsedData.Elements[0].DataSeries.close.values);
+      let priceval = parsedData.Elements[0].DataSeries.close.values;
+      let summedprice = 0
+
+      for (var i=0; i<priceval.length; i++) {
+        summedprice += Number(priceval[i]);
+      }
+
+      let priceavg = Math.round(summedprice/priceval.length);
+
+      console.log("the average price is ", priceavg);
+
 
     } catch (e) {
       console.log(e.message);
